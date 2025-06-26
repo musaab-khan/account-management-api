@@ -1,5 +1,10 @@
-import { Sequelize } from 'sequelize';
-
+import { Sequelize } from 'sequelize-typescript';
+import User from '../models/Users.js';
+import Address from '../models/Address.js';
+import Roles from '../models/Roles.js';
+import Permissions from '../models/Permissions.js';
+import roles_permissions from '../models/roles_permissions.js';
+import user_roles from '../models/user_roles.js';
 
 const sequelize = new Sequelize(
     "postgres",
@@ -9,7 +14,8 @@ const sequelize = new Sequelize(
         host: 'localhost',
         port: 5432,
         dialect: "postgres",
-        logging: false
+        logging: false,
+        models: [User, Address, Roles, Permissions, roles_permissions, user_roles]
     }
 );
 
@@ -23,6 +29,5 @@ async function testDB(){
         console.log("Error: ",error);
     }
 }
-
 
 export {sequelize,testDB};
